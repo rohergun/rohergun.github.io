@@ -1,0 +1,94 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials.
+   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }}
+);
+
+/* Your project partials — convert these files to `@use "variables";`
+   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+// -----------------------------------------------------------------------------
+// Site-specific overrides
+// -----------------------------------------------------------------------------
+
+// Push the social icons row below the (floated) profile photo, and shrink the icons.
+.social {
+  clear: both;
+  margin-top: 1.5rem;
+
+  .contact-icons {
+    font-size: 2rem;
+  }
+}
+
+// Projects: one row per project instead of a card grid, no thumbnail.
+.projects-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-list-item {
+  display: block;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--global-divider-color);
+  text-decoration: none;
+  color: inherit;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:hover .project-list-title {
+    color: var(--global-theme-color);
+  }
+}
+
+.project-list-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+}
+
+.project-list-description {
+  margin: 0 0 0.5rem;
+  color: var(--global-text-color);
+  opacity: 0.85;
+}
+
+.project-list-tech {
+  margin: 0;
+}
+
+.tech-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  margin: 0 0.4rem 0.4rem 0;
+  border-radius: 1rem;
+  background-color: var(--global-divider-color);
+  color: var(--global-text-color);
+}
