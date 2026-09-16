@@ -21,6 +21,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install system dependencies (ImageMagick, Jupyter)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Jupyter
+        run: pip install --upgrade jupyter nbconvert
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
